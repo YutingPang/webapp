@@ -39,6 +39,7 @@ async def select(sql, args, size=None):
         logging.info('rows returned: %s' % len(rs))
         return rs
 
+
 async def execute(sql, args, autocommit=True):
     log(sql, args)
     async with __pool.get() as conn:
