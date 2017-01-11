@@ -38,8 +38,49 @@
 			<a href="/" class="uk-navbar-brand">Awesome</a>
 			<ul class="uk-navbar-nav">
 					<li data-url="blogs"><a href="/"><i class="uk-icon-home"></i>BLOGs</a></li>
+					<li><a target="_blank" href="/"><i class="uk-icon-book"></i>TAB1</a></li>
+					<li><a target="_blank" href="/"><i class="uk-icon-code"></i>TAB2</a></li>
 			</ul>
+			<div>
+				<ul class="uk-navbar-flip">
+				{% if __user__ %}
+					<li class="uk-parent" data-uk-dropdown>
+						<a href="#0"><i class="uk-icon-user"></i> {{ __user__.name}}</a>
+						<div class="uk-dropdown uk-dropdown-navbar">
+							<ul class="uk-nav uk-nav-nav-bar">
+								<li><a href="/signout"><i class="uk-icon-sign-out"></i>Sign Out</a></li>
+							</ul>
+						</div>
+					</li>
+				{% else %}
+					<li><a href="/signin"><i class="uk-icon-sign-in"></i>Sign In</a></li>
+					<li><a href="/signup"><i class="uk-icon-edit"></i>Sign Up</a></li>
+				{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="uk-container uk-container-center">
+		<div class="uk-grid">
+			<!-- content-->
+			{% block content %}
+			{% end block %}
+			<!-- //content-->
+		</div>
+	</div>
+
+	<div class="uk-margin-large-top" style="background-color:#eee; border-top:1px solid #ccc;">
+		<p>
+			<a target="_blank" href="https://www.linkedin.com/in/yutingpang" class="uk-icon-button uk-icon-linkedin"></a>
+			<a target="_blank" href="https://github.com/YutingPang" class="uk-icon-button uk-icon-github"></a>
+			<a target="_blank" href="https://www.facebook.com/yuting.pang.3" class="uk-icon-button uk-icon-facebook"></a>
+			<a target="_blank" href="https://twitter.com/yuting_pang" class="uk-icon-button uk-icon-twitter"></a>
+		</p>
+		<p>Powered by <a href="/">YYY</a>. Copyright &copy; 2016. [<a href="/manage/" target="_blank">Manage</a>]</p>
+		<p><a href="/" target="_blank">www.yutingpang.com</a>. All rights reserved.</p>
+		<a target="_blank" href="http://www.w3.org/TR/html5"><i class="uk-icon-html5" style="font-size:64px; color: #444"></i></a>
+	</div>
+
 </body>
-
-
-
+</html>
