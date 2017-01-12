@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json
-import logging
-import inspect
-import functools
+import json, logging, inspect, functools
 
 
 class APIError(Exception):
