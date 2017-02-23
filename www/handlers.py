@@ -12,7 +12,7 @@ import re, time, json, logging, hashlib, base64, asyncio
 from aiohttp import web
 
 from coroweb import get, post
-from apis import APIValueError, APIResourceNotFoundError
+from apis import Page, APIValueError, APIResourceNotFoundError
 
 from models import User, Comment, Blog, next_id
 from config import configs
@@ -74,16 +74,18 @@ def cookie2user(cookie_str):
 
 
 @get('/')
-def index(request):
-    summary = 'asdfnk oipo sadohf oiuhsakdj oiuhykjsad fiuhykjbsad hujasdf joiuads jfsadf uasdok qoweihj f sadi qjwkefds foiajf da.'
-    blogs = [
-        Blog(id='1', name='Test Blog', summary=summary, created_at=time.time()-120),
-        Blog(id='2', name='FOOBAR', summary=summary, created_at=time.time()-3500),
-        Blog(id='3', name='BLABLA', summary=summary, created_at=time.time()-7200),
-    ]
+def index(*, page='1'):
+    page_index = get_page_index(page)
+    num = yield from Blog.findNumber('count(id)')
+    page = Page(num)
+    if num == 0:
+        blogs = []
+    else:
+        blogs = yield from Blog.findAll(orderBy='created_at desc', limit=(page.offset, page.limi))
     return {
         '__template__': 'blogs.html',
-        'blogs': blogs
+        'page': page,
+        'blogs' : blogs
     }
 
 
